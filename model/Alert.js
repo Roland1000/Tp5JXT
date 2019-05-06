@@ -5,7 +5,7 @@ const Status = require("./Status");
 const uuidv1 = require("uuidv1");
 
 
-const schemaAlert = new Schema({
+const alertSchema = new Schema({
     id: {type: String, required: false },
     type: {type: Category, required: true },
     label: {type: String, required: true },
@@ -21,3 +21,5 @@ const ajout = (alert, callback)  => {
         //id.uuidv1,
     }
 }
+
+module.exports =mongoose.model('Alert', alertSchema);
