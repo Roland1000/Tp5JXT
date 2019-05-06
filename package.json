@@ -1,0 +1,32 @@
+{
+  "name": "tp_jxt_5f",
+  "version": "1.0.0",
+  "description": "Documentation de base pour le TP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Roland1000/Tp5JXT.git"
+  },
+  "author": "Oumar Ballo & Roland Kouassi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Roland1000/Tp5JXT/issues"
+  },
+  "homepage": "https://github.com/Roland1000/Tp5JXT#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "commander": "^2.20.0",
+    "helmet": "^3.18.0",
+    "nodemon": "^1.19.0",
+    "nyc": "^14.1.0",
+    "tcomb": "^3.2.29",
+    "uuid": "^3.3.2"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
