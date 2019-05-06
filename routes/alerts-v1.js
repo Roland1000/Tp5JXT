@@ -65,16 +65,19 @@ router.get('/', (req, res) =>{
 
 
 //create a new alert in the alerts list
-router.post('/alerts', (req, res) =>{
+router.post('/', (req, res) =>{
     const newAlert = new Alert(req.body)
 
     //saving the new alert into the database
     newAlert.save().then((result) => {
         console.log(result)
-        res.json('Alert created successfully ')
+        res
+            .status(200)
+            .json('Alert created successfully ')
+        
     }).catch((err) => {
         console.log("error "+ err);
-        res.status(err.status)
+        res.status(400)
         res.json("Aie une erreur")
     });
 

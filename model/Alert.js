@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const Category = require("./Category");
 const Status = require("./Status");
 const uuidv1 = require("uuidv1");
+const host = require("./../config/connect").host;
 
 
 const alertSchema = new Schema({
@@ -15,11 +16,20 @@ const alertSchema = new Schema({
 })
 
 
-const ajout = (alert, callback)  => {
-    const myAlert = {
-        ...alert,
-        id: uuidv1(),
-    };
+// const Alert = mongoose.model('Alert', alertSchema);
+// module.exports = Alert;
+
+mongoose.set('useFindAndModify', false);
+mongoose.connect(host, { useNewUrlParser: true });
+
+const Alerts = mongoose.model("Alerts", alertSchema);
+
+const add = (alert, callback) => {
+  const newAlert = {
+    ...alert,
+    id: uuidv1()
+  };
+
 
     new Alerts(newAlert).save(err => {
         if (err) {
@@ -74,4 +84,5 @@ const ajout = (alert, callback)  => {
     module.exports.getFromStatus = getFromStatus;
     module.exports.remove = remove;
 
-    module.exports =mongoose.model('Alert', alertSchema);
+   
+   
