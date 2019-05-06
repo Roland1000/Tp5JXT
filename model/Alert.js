@@ -18,8 +18,60 @@ const alertSchema = new Schema({
 const ajout = (alert, callback)  => {
     const myAlert = {
         ...alert,
-        //id.uuidv1,
-    }
-}
+        id: uuidv1(),
+    };
 
-module.exports =mongoose.model('Alert', alertSchema);
+    new Alerts(newAlert).save(err => {
+        if (err) {
+          callback(err, null);
+        } else {
+          console.log("saved");
+          callback(null, newAlert);
+        }
+      });
+    };
+    
+    const getFromStatus = (mystatus,callback) => {
+     Alerts.find({status:{$in:mystatus}},(err,alert)=>{
+     err?callback(err,null):callback(null,alert)
+    
+     })
+    };
+    const get = (alertId, callback) => {
+      Alerts.find({ id: alertId }, (err, alert) => {
+          err ? callback(err, null) : callback(null, alert);
+      });
+    };
+    
+    const update = (alertId, newalert, callback) => {
+      Alerts.findOneAndUpdate(
+        { id: alertId },
+        newalert,
+        { new: true },
+        (err, alert) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            callback(null, alert);
+          }
+        }
+      );
+    };
+    
+    const remove = (alertId, callback) => {
+      Alerts.findOneAndDelete({ id: alertId }, (err, alert) => {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, alert);
+        }
+      });
+    };
+    
+    module.exports.add = add;
+    module.exports.get = get;
+    module.exports.update = update;
+    module.exports.getFromStatus = getFromStatus;
+    module.exports.remove = remove;
+
+    module.exports =mongoose.model('Alert', alertSchema);
