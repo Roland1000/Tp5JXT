@@ -64,25 +64,46 @@ router.get('/', (req, res) =>{
 })
 
 
-//create a new alert in the alerts list
-router.post('/', (req, res) =>{
-    const newAlert = new Alert(req.body)
+// //create a new alert in the alerts list
+// router.post('/', (req, res) =>{
+//     const newAlert = new Alert(req.body)
 
-    //saving the new alert into the database
-    newAlert.save().then((result) => {
-        console.log(result)
-        res
-            .status(200)
-            .json('Alert created successfully ')
+//     //saving the new alert into the database
+//     newAlert.save().then((result) => {
+//         console.log(result)
+//         res
+//             .status(200)
+//             .json('Alert created successfully ')
         
-    }).catch((err) => {
-        console.log("error "+ err);
-        res.status(400)
-        res.json("Aie une erreur")
-    });
+//     }).catch((err) => {
+//         console.log("error "+ err);
+//         res.status(400)
+//         res.json("Aie une erreur")
+//     });
 
     
-})
+// })
+
+/* Add a new alert. */
+router.post("/", function(req, res, next) {
+  const newAlert = req.body;
+  if (newAlert) {
+    try {
+      alertsModel.add(newAlert, (err, result) => {
+        if (err) {
+          res.status(400).json({ message: err.message });
+        } else {
+            res.status(200).json({message:'successuf operation'});
+        }
+      });
+    } catch (exc) {
+      res.status(400).json({ message: exc.message });
+    }
+  } else {
+    res.status(405).json({ message: 'Invalid input' });
+  }
+});
+
 
 function alertFound(alertFound){
     return {
@@ -97,6 +118,6 @@ function alertFound(alertFound){
 
 /** return a closure to initialize model */
 module.exports = (model) => {
-    alertsModel = model
-    return router
+    alertsModel = model;
+    return router;
   }

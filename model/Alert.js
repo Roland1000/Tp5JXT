@@ -1,19 +1,39 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+//const Schema = mongoose.Schema;
 const Category = require("./Category");
 const Status = require("./Status");
-const uuidv1 = require("uuidv1");
+const uuidv1 = require("uuid/v1");
 const host = require("./../config/connect").host;
 
 
-const alertSchema = new Schema({
-    id: {type: String, required: false },
-    type: {type: Category, required: true },
-    label: {type: String, required: true },
-    status : {type: Status, required: true },
-    from: {type: String, required: true },
-    to: {type: String, required: true },
-})
+const alertSchema = mongoose.Schema({
+    id: String,
+    type: 
+        {
+          type: Category, 
+          required: true 
+        },
+    label: 
+        {
+         type: String,
+         required: true 
+        },
+    status : 
+        { 
+         type: Status, 
+         required: true 
+        },
+    from: 
+        {
+          type: String, 
+          required: true 
+        },
+    to: 
+        {
+          type: String, 
+          required: true 
+        }
+});
 
 
 // const Alert = mongoose.model('Alert', alertSchema);
@@ -24,22 +44,44 @@ mongoose.connect(host, { useNewUrlParser: true });
 
 const Alerts = mongoose.model("Alerts", alertSchema);
 
-const add = (alert, callback) => {
-  const newAlert = {
-    ...alert,
-    id: uuidv1()
-  };
+// const add = (alert, callback) => {
+//   const newAlert = {
+//     ...alert,
+//     id: uuidv1()
+//   };
+//     new Alerts(newAlert).save(err => {
+//         if (err) {
+//           callback(err, null);
+//         } else {
+//           console.log("saved");
+//           callback(null, newAlert);
+//         }
+//       });
+//     };
 
+const add = async (alert) => {
+  alert = {
+      ...alert,
+      id: uuidv1()
+  } 
+  const newAlert = new Alerts({
+      ...alert
+  })
+  if (alertValidator(alert)) {
+      try {
+          await newAlert.save()
+      } catch(exc) {
+          throw new Error(exc)
+      }
+  } else {
+      throw new Error('no valid alert');
+      
+  }
+}
 
-    new Alerts(newAlert).save(err => {
-        if (err) {
-          callback(err, null);
-        } else {
-          console.log("saved");
-          callback(null, newAlert);
-        }
-      });
-    };
+const alertValidator = (alert) => {
+  return true
+}
     
     const getFromStatus = (mystatus,callback) => {
      Alerts.find({status:{$in:mystatus}},(err,alert)=>{

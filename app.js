@@ -11,16 +11,16 @@ const app = express()
 
 mongoose.Promise = global.Promise;
 
-let dev_db_url = "mongodb://localhost:27017/alerts";
-let mongodDB = process.env.MONGODB_URI || dev_db_url;
-mongoose
-        .connect(mongodDB)
-        .then(function(){
-            console.log("Databse is connected .....");
-        })
+//let dev_db_url = "mongodb://localhost:27017/alertsDB";
+//let mongodDB = process.env.MONGODB_URI || dev_db_url;
+// mongoose
+//         .connect(mongodDB)
+//         .then(function(){
+//             console.log("Databse is connected .....");
+//         })
 
-let db = mongoose.connection;
-db.on('error',console.error.bind(console,'MongoDB connection error: '))
+//let db = mongoose.connection;
+//db.on('error',console.error.bind(console,'MongoDB connection error: '))
 
 
 // Activation de Helmet

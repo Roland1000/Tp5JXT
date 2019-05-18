@@ -1,5 +1,8 @@
-const Enum = require('enum');
-const Status = new Enum (["warning","threat","danger","risk"])
-
-
-module.exports.Status = Status;
+const Status= {
+    warning: "warning",
+    threat: "threat",
+    danger: "danger",
+    risk: "risk"
+  
+};
+module.exports.Status=Status;
