@@ -3,6 +3,6 @@ const Status= {
     threat: "threat",
     danger: "danger",
     risk: "risk"
+  };
   
-};
 module.exports.Status=Status;
