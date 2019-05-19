@@ -44,16 +44,16 @@ router.get('/:id', function(req, res, next){
   }
   else{
     res.status(400)
-    res.json({message: "Invalid ID supplied"})
+    res.json({message: "Invalid ID supplied"});
   }
 })
 
 router.get('/', (req, res) =>{
-  alert.find(null, (err, mesAlerts)=>{
+  alert.find(null, (err, myAlerts)=>{
     if(err) {throw err };
-    res.json({'alerts': mesAlerts});
+    res.json({'alerts': myAlerts});
   })
-  res.json("alertsModel")
+  res.json("alertsModel");
 
 })
 
@@ -87,7 +87,7 @@ const alertFound = (alertFound) =>{
     status: alertFound.status,
     from: alertFound.from,
     to: alertFound.to 
-  }
+  };
 }
 
 

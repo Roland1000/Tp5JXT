@@ -34,8 +34,6 @@ to:
 }
 });
 
-// const Alert = mongoose.model('Alert', alertSchema);
-// module.exports = Alert;
 
 mongoose.set('useFindAndModify', false);
 mongoose.connect(host, { useNewUrlParser: true });
@@ -63,8 +61,8 @@ const alertValidator = (alert) => {
   return true
 }
 
-const getFromStatus = (mystatus,callback) => {
- Alerts.find({status:{$in:mystatus}},(err,alert)=>{
+const getFromStatus = (myStatus,callback) => {
+ Alerts.find({status:{$in:myStatus}},(err,alert)=>{
    err?callback(err,null):callback(null,alert)
 
  })
