@@ -1,80 +1,38 @@
-*****Auteurs*****
+# Compte rendu du TP 6 de JXT
 
-***Oumar BALLO***
 
-***Roland KOUASSI***
++ ****Auteurs****
 
-# Cours ESIR 2019
+     **Oumar BALLO**
 
-Documentation de base pour le TP
+     **Roland KOUASSI**
 
-__Rappel pour toute communbication avec moi, n'oubliez pas de me mettre le noms du groupe de TP et le noms des personnes du groupe__
 
-# Objectif
+Ce TP portait sur la mise en place d'un système d'alerte.
+
+
+# Objectif : 
 Réaliser un service avec NodeJS et MongoDB offrant une API CRUD. 
 + Cette API sera sécurisée par un JWT fourni par le service élaboré en première partie de TP avec Stéphane Michel.
 + le contrat d'API est celui fourni dans le swagger de ce projet
 
-# Livrable
-Le livrable sera un zip ou un dépôt git (accessible) il devra contenir
-+ le code 
-  + le code du serveur
-  + les tests
-  + les scripts (s'il y en a)
-+ la documentation expliquant comment ça marche, ou pourquoi cela ne marche pas, pas besoin d'être long (des readme.md suffisent ou le lien sur un google doc ou autre)
 
-Le code doit pouvoir être installé et lancé avec les opérations suivantes :
-```
-git clone // ou // unzip monfichier.zip
-npm install
-npm test
-npm start
-```
+## Fonctionnement du code
+Pour exécuter notre code, il faut suivre les étapes suivantes : 
 
-__Remarque :__ n'oubliez pas qu'il me faut un token (jwt) pour interroger l'API, aussi, il faut _au choix_ :
-+ fournir un jwt que je pourrais insérer dans mes requêtes de test
-+ fournir le service développé dans la première partie afin que je puisse me logger pour récupérer le token
++ Taper la commande   **git clone https://github.com/Roland1000/Tp6JXT.git**   pour cloner notre depot Git pour avoir notre   code en local sur votre machine.
 
-# Utilisation de MongoDB
-
-Différentes Solutions
-+ installer mongo en local sur le pc (si on a les droits)
-+ utiliser docker pour lancer un container mongo en local sur le pc (si on a les droits) (vous pouvez trouver un tel container linux [ici](https://github.com/benco1967/mongo-container)
-+ utiliser une instance externe sur le cloud [atlas de mongodb](https://www.mongodb.com/cloud/atlas) l'instance de base est gratuite
-
-_remarque :_ Pensez à utiliser des paramètres de configuration pour accéder à votre base de données. En effet pour que je puisse tester vos livrable il me faudra tester sur ma propre base.
-
-# Authentification
-L'authentification se fait avec le JWT fourni par le précédent projet. C'est la même authentification que pour la partie CRUD.
-
-# Configuration
-Pour faciliter l'utilisation d'un service il est nécessaire de pouvoir le configurer, pour cela la lib `config` est la plus pratique et répandue, elle gère aussi bien différentes versions de fichier de configuration que le variables d'environnement. L'utilisation des variables d'environnement est très pratique en utilisation conjoite avec _docker_.
-
-Vous pouvez la trouver sur le [repo npm](https://www.npmjs.com/package/config)
-
-Une présentaiton succinte est disponible dans [cette présentation](https://slides.com/benoitchanclou/mean#/9)
-
-Liste des éléments configurables :
-+ accès la la base de données
-  + host
-  + port
-  + identity
-  + password
-+ spécification du serveur
-  + host
-  + port
-  
-___REMARQUE IMOPORTANTE : N'oubliez pas que les fichiers de configuration peuvent contenir des informations privées d'authentification, si c'est le cas ne les mettez pas sur un repository public.___ Pour cela n'oubliez pas d'ajouter les fichiers de configuration contenant des données privées dans votre fichier `.gitignore`. 
-En revanche, le fichier `/config/default.yml` doit contenir des valeurs par défaut pour toutes les variables, les valeurs pouvant être juste des exemples invalides, par exemple :
-
-```
-# accès à la base de données
-host: 127.0.0.1
-port: 27017
-user: username
-password: mon_mot_de_passe
-```
-Ainsi les variables sont définies même si leurs valeurs feront échouer les requêtes. Le format YAML est le plus intéressant pour les fichiers de configuration car il permet d'ajouter des commentaire avec `#` pour faciliter la configuration mettre un commentaire pour explicité chacune des variables est une bonne pratique. Il n'est ainsi pas nécessaire de fournir une documentation de configuration.
++ Ensuite taper la commande   **npm install**   pour installer toutes les dependances qu'il faut pour executer notre code. 
+  Puis taper la commande  **npm start**  pour lancer le serveur qui écoute sur le port 3000. En effet, nous avons utilisé     le module  **nodemon** qui permet au serveur de se relancer automatiquement chaque qu'il y a des modifications.
+   
++ Après avoir lancer le serveur, il faudra utiliser **postman** pour lui envoyer des requêtes. Dans un premier temps on va     envoyer au serveur une requête post ( création d'une alerte) qui permettra de création la base données mongoDB que nous     avons appélée  **MyAlertsBD**.La requête à envoyer au serveur est : http://localhost:3000/v1/alerts.
+   
+   
+   
+## Ce qui ne marche pas
+La commande est **npm test** permettant normalement de lancer les tests ne marche pas. En effet, nous n'avons pas pu implémenter les tests car nous avons pris beaucoup de retard sur ce TP. 
 
 
-  
+
+## Nos difficultés
+Lors de ce TP, nous avons rencontré cerataines difficultés notamment avec la partie création de la base de données mongoDB. En effet, après spécifier le schema de notre base de données dans le fichier Alert.js, nous arrivions pas à envoyer de requête au serveur à travers **postman** du fait que les champs de notre schéma soirnt réquis "required". N'ayant pas trouvé la solution à ce problème, nous avons pris l'initiative de commenter les differentes lignes "required". Et suite à cela, on est parvenu à envoyer des requêtes au serveur donc créer la base de données.
