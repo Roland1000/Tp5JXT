@@ -30,7 +30,7 @@ Pour exécuter notre code, il faut suivre les étapes suivantes :
    
    
 ## Ce qui ne marche pas
-La commande est **npm test** permettant normalement de lancer les tests ne marche pas. En effet, nous n'avons pas pu implémenter les tests car nous avons pris beaucoup de retard sur ce TP. 
+La commande  **npm test** permettant normalement de lancer les tests ne marche pas. En effet, nous n'avons pas pu implémenter les tests car nous avons pris beaucoup de retard sur ce TP. 
 
 
 
